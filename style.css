@@ -86,8 +86,45 @@ button:hover {
 }
 
 #more-results {
-    display: block;
+    display: none; /* Hide by default */
     margin: 1rem auto;
+}
+
+.result-card {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+}
+
+.result-image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 1rem;
+    border-radius: 5px;
+}
+
+.result-details {
+    flex: 1;
+}
+
+.result-details h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.result-details p {
+    margin: 0.5rem 0;
+    color: #555;
 }
 
 footer {
