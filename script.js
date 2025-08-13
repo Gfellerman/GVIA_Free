@@ -1,35 +1,3 @@
-const mockVehicleData = [
-    // Goods Vehicles (Vans, Trucks)
-    { id: 1, make: 'Ford', model: 'Transit', price: 35000, imageUrl: 'https://placehold.co/300x200/233E8B/white?text=Ford+Transit', fuel_consumption: '8.5L/100km', warranty: '3 years / 100,000 km', transportType: 'goods', tripRange: 'long', vehicleClass: 'medium', mileage: 20000, year: 2022, orientation: 'economic', color: 'dark', origin: 'na', powertrain: 'diesel', body: '5door', tonnageCapacity: 1.5, cubicMeterCapacity: 10, towingCapacity: 2000 },
-    { id: 2, make: 'Mercedes-Benz', model: 'Sprinter', price: 42000, imageUrl: 'https://placehold.co/300x200/1E5F74/white?text=MB+Sprinter', fuel_consumption: '9.0L/100km', warranty: '3 years / 100,000 km', transportType: 'goods', tripRange: 'long', vehicleClass: 'luxury', mileage: 15000, year: 2023, orientation: 'powerful', color: 'bright', origin: 'eu', powertrain: 'diesel', body: '5door', tonnageCapacity: 2, cubicMeterCapacity: 12, towingCapacity: 2500 },
-    { id: 3, make: 'Chevrolet', model: 'Express', price: 33000, imageUrl: 'https://placehold.co/300x200/A569BD/white?text=Chevy+Express', fuel_consumption: '14.0L/100km', warranty: '3 years / 60,000 km', transportType: 'goods', tripRange: 'short', vehicleClass: 'basic', mileage: 50000, year: 2021, orientation: 'powerful', color: 'dark', origin: 'na', powertrain: 'petrol', body: '3door', tonnageCapacity: 1.8, cubicMeterCapacity: 11, towingCapacity: 2200 },
-    { id: 4, make: 'Ram', model: 'ProMaster', price: 34000, imageUrl: 'https://placehold.co/300x200/D35400/white?text=Ram+ProMaster', fuel_consumption: '12.0L/100km', warranty: '3 years / 60,000 km', transportType: 'goods', tripRange: 'short', vehicleClass: 'medium', mileage: 40000, year: 2022, orientation: 'economic', color: 'bright', origin: 'na', powertrain: 'petrol', body: '5door', tonnageCapacity: 1.7, cubicMeterCapacity: 13, towingCapacity: 2100 },
-    { id: 9, make: 'Ford', model: 'F-150', price: 45000, imageUrl: 'https://placehold.co/300x200/233E8B/white?text=Ford+F-150', fuel_consumption: '11.0L/100km', warranty: '3 years / 60,000 km', transportType: 'goods', tripRange: 'long', vehicleClass: 'medium', mileage: 30000, year: 2022, orientation: 'powerful', color: 'dark', origin: 'na', powertrain: 'hybrid', body: '5door', tonnageCapacity: 1, cubicMeterCapacity: 4, towingCapacity: 5000 },
-    { id: 10, make: 'Chevrolet', model: 'Silverado', price: 44000, imageUrl: 'https://placehold.co/300x200/A569BD/white?text=Chevy+Silv', fuel_consumption: '11.5L/100km', warranty: '3 years / 60,000 km', transportType: 'goods', tripRange: 'long', vehicleClass: 'medium', mileage: 35000, year: 2021, orientation: 'powerful', color: 'dark', origin: 'na', powertrain: 'diesel', body: '5door', tonnageCapacity: 1.2, cubicMeterCapacity: 4.5, towingCapacity: 5500 },
-    { id: 11, make: 'Ram', model: '1500', price: 46000, imageUrl: 'https://placehold.co/300x200/D35400/white?text=Ram+1500', fuel_consumption: '11.2L/100km', warranty: '3 years / 60,000 km', transportType: 'goods', tripRange: 'long', vehicleClass: 'luxury', mileage: 25000, year: 2023, orientation: 'powerful', color: 'bright', origin: 'na', powertrain: 'petrol', body: '5door', tonnageCapacity: 1.1, cubicMeterCapacity: 4.2, towingCapacity: 5200 },
-
-    // Person Vehicles (Minivans, Sedans, Hatchbacks)
-    { id: 5, make: 'Toyota', model: 'Sienna', price: 38000, imageUrl: 'https://placehold.co/300x200/16A085/white?text=Toyota+Sienna', fuel_consumption: '7.5L/100km', warranty: '3 years / 60,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'medium', mileage: 22000, year: 2022, orientation: 'economic', color: 'bright', origin: 'jp', powertrain: 'hybrid', body: '5door' },
-    { id: 6, make: 'Honda', model: 'Odyssey', price: 37000, imageUrl: 'https://placehold.co/300x200/C0392B/white?text=Honda+Odyssey', fuel_consumption: '8.0L/100km', warranty: '3 years / 60,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'medium', mileage: 28000, year: 2021, orientation: 'economic', color: 'dark', origin: 'jp', powertrain: 'petrol', body: '5door' },
-    { id: 7, make: 'Chrysler', model: 'Pacifica', price: 39000, imageUrl: 'https://placehold.co/300x200/8E44AD/white?text=Chr+Pacifica', fuel_consumption: '7.8L/100km', warranty: '3 years / 60,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'luxury', mileage: 18000, year: 2023, orientation: 'economic', color: 'bright', origin: 'na', powertrain: 'hybrid', body: '5door' },
-    { id: 8, make: 'Kia', model: 'Carnival', price: 36000, imageUrl: 'https://placehold.co/300x200/2C3E50/white?text=Kia+Carnival', fuel_consumption: '8.2L/100km', warranty: '5 years / 100,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'medium', mileage: 10000, year: 2023, orientation: 'economic', color: 'dark', origin: 'kr', powertrain: 'petrol', body: '5door' },
-    { id: 15, make: 'Volkswagen', model: 'Golf', price: 28000, imageUrl: 'https://placehold.co/300x200/3498DB/white?text=VW+Golf', fuel_consumption: '6.5L/100km', warranty: '4 years / 80,000 km', transportType: 'person', tripRange: 'short', vehicleClass: 'medium', mileage: 45000, year: 2020, orientation: 'economic', color: 'bright', origin: 'eu', powertrain: 'petrol', body: 'hatchback' },
-    { id: 16, make: 'Toyota', model: 'Corolla', price: 25000, imageUrl: 'https://placehold.co/300x200/16A085/white?text=Toyota+Corol', fuel_consumption: '6.0L/100km', warranty: '3 years / 60,000 km', transportType: 'person', tripRange: 'short', vehicleClass: 'basic', mileage: 60000, year: 2019, orientation: 'economic', color: 'dark', origin: 'jp', powertrain: 'petrol', body: 'sedan' },
-    { id: 17, make: 'Honda', model: 'Civic', price: 26000, imageUrl: 'https://placehold.co/300x200/C0392B/white?text=Honda+Civic', fuel_consumption: '6.2L/100km', warranty: '3 years / 60,000 km', transportType: 'person', tripRange: 'short', vehicleClass: 'basic', mileage: 55000, year: 2020, orientation: 'economic', color: 'bright', origin: 'jp', powertrain: 'petrol', body: 'sedan' },
-    { id: 18, make: 'Hyundai', model: 'Elantra', price: 24000, imageUrl: 'https://placehold.co/300x200/2980B9/white?text=Hyundai+Elan', fuel_consumption: '6.4L/100km', warranty: '5 years / 100,000 km', transportType: 'person', tripRange: 'short', vehicleClass: 'basic', mileage: 65000, year: 2019, orientation: 'economic', color: 'dark', origin: 'kr', powertrain: 'petrol', body: 'sedan' },
-    { id: 19, make: 'Mazda', model: '3', price: 27000, imageUrl: 'https://placehold.co/300x200/E74C3C/white?text=Mazda+3', fuel_consumption: '6.8L/100km', warranty: '3 years / unlimited km', transportType: 'person', tripRange: 'short', vehicleClass: 'medium', mileage: 40000, year: 2021, orientation: 'powerful', color: 'bright', origin: 'jp', powertrain: 'petrol', body: 'hatchback' },
-    { id: 20, make: 'Kia', model: 'Forte', price: 23000, imageUrl: 'https://placehold.co/300x200/2C3E50/white?text=Kia+Forte', fuel_consumption: '6.6L/100km', warranty: '5 years / 100,000 km', transportType: 'person', tripRange: 'short', vehicleClass: 'basic', mileage: 70000, year: 2018, orientation: 'economic', color: 'dark', origin: 'kr', powertrain: 'petrol', body: 'sedan' },
-    { id: 21, make: 'BMW', model: '3 Series', price: 55000, imageUrl: 'https://placehold.co/300x200/3498DB/white?text=BMW+3+Series', fuel_consumption: '7.0L/100km', warranty: '4 years / 80,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'luxury', mileage: 30000, year: 2022, orientation: 'powerful', color: 'dark', origin: 'eu', powertrain: 'petrol', body: 'sedan' },
-    { id: 22, make: 'Mercedes-Benz', model: 'C-Class', price: 58000, imageUrl: 'https://placehold.co/300x200/1E5F74/white?text=MB+C-Class', fuel_consumption: '7.2L/100km', warranty: '4 years / 80,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'luxury', mileage: 25000, year: 2023, orientation: 'powerful', color: 'bright', origin: 'eu', powertrain: 'petrol', body: 'sedan' },
-    { id: 23, make: 'Audi', model: 'A4', price: 56000, imageUrl: 'https://placehold.co/300x200/9B59B6/white?text=Audi+A4', fuel_consumption: '7.1L/100km', warranty: '4 years / 80,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'luxury', mileage: 28000, year: 2022, orientation: 'powerful', color: 'dark', origin: 'eu', powertrain: 'petrol', body: 'sedan' },
-    { id: 25, make: 'Tesla', model: 'Model 3', price: 52000, imageUrl: 'https://placehold.co/300x200/E67E22/white?text=Tesla+Model+3', fuel_consumption: '15 kWh/100km', warranty: '4 years / 80,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'luxury', mileage: 32000, year: 2022, orientation: 'powerful', color: 'bright', origin: 'na', powertrain: 'electric', body: 'sedan' },
-    { id: 26, make: 'Ford', model: 'Mustang Mach-E', price: 59000, imageUrl: 'https://placehold.co/300x200/233E8B/white?text=Mustang+M-E', fuel_consumption: '17 kWh/100km', warranty: '3 years / 60,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'luxury', mileage: 20000, year: 2023, orientation: 'powerful', color: 'bright', origin: 'na', powertrain: 'electric', body: '5door' },
-    { id: 27, make: 'Hyundai', model: 'Ioniq 5', price: 53000, imageUrl: 'https://placehold.co/300x200/2980B9/white?text=Ioniq+5', fuel_consumption: '16.7 kWh/100km', warranty: '5 years / 100,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'medium', mileage: 15000, year: 2023, orientation: 'economic', color: 'dark', origin: 'kr', powertrain: 'electric', body: 'hatchback' },
-    { id: 28, make: 'Kia', model: 'EV6', price: 54000, imageUrl: 'https://placehold.co/300x200/2C3E50/white?text=Kia+EV6', fuel_consumption: '16.5 kWh/100km', warranty: '5 years / 100,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'medium', mileage: 12000, year: 2023, orientation: 'powerful', color: 'bright', origin: 'kr', powertrain: 'electric', body: 'hatchback' },
-    { id: 29, make: 'Volkswagen', model: 'ID.4', price: 51000, imageUrl: 'https://placehold.co/300x200/3498DB/white?text=VW+ID.4', fuel_consumption: '17.2 kWh/100km', warranty: '4 years / 80,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'medium', mileage: 18000, year: 2022, orientation: 'economic', color: 'dark', origin: 'eu', powertrain: 'electric', body: '5door' },
-    { id: 30, make: 'Subaru', model: 'Solterra', price: 55000, imageUrl: 'https://placehold.co/300x200/34495E/white?text=Subaru+Solt', fuel_consumption: '17.5 kWh/100km', warranty: '3 years / 60,000 km', transportType: 'person', tripRange: 'long', vehicleClass: 'medium', mileage: 10000, year: 2023, orientation: 'economic', color: 'bright', origin: 'jp', powertrain: 'electric', body: '5door' }
-];
-
 document.addEventListener('DOMContentLoaded', () => {
     const filterForm = document.getElementById('filter-form');
     const powertrainAllCheckbox = document.getElementById('powertrain-all');
@@ -94,9 +62,122 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedFilters[key] = value;
             }
         }
-        const filteredVehicles = filterVehicles(selectedFilters, mockVehicleData);
-        displaySearchResults(filteredVehicles);
+        // Instead of filtering mock data, fetch from API
+        fetchVehicleData(selectedFilters);
     });
+
+    function fetchVehicleData(filters) {
+        // 1. Construct the API URL from filters
+        const baseUrl = 'https://www.carqueryapi.com/api/0.3/';
+        let apiUrl = `${baseUrl}?callback=handleCarQueryResponse&cmd=getTrims`;
+
+        // Map our filter names to API parameter names
+        // Note: This is a simplified mapping. CarQuery might not support all our filters directly.
+        if (filters['vehicle-class']) {
+            const vehicleClass = Array.isArray(filters['vehicle-class']) ? filters['vehicle-class'][0] : filters['vehicle-class'];
+            apiUrl += `&body=${vehicleClass}`;
+        }
+        if (filters['powertrain']) {
+            const powertrain = Array.isArray(filters['powertrain']) ? filters['powertrain'][0] : filters['powertrain'];
+            apiUrl += `&fuel_type=${powertrain}`;
+        }
+        if (filters['max-years']) {
+             const minYear = new Date().getFullYear() - parseInt(filters['max-years'], 10);
+             apiUrl += `&min_year=${minYear}`;
+        }
+
+        // 2. Create a script tag for the JSONP request
+        const script = document.createElement('script');
+        script.src = apiUrl;
+        document.body.appendChild(script);
+
+        // 3. Clean up the script tag after it's loaded/failed
+        script.onload = () => {
+            document.body.removeChild(script);
+        };
+        script.onerror = () => {
+             alert('Error: Could not fetch data from the API.');
+             document.body.removeChild(script);
+        };
+    }
+
+    // 4. Define the global callback function that the API will call
+    window.handleCarQueryResponse = function(data) {
+        console.log('Received data from CarQuery API:', data);
+        if (data.Trims && data.Trims.length > 0) {
+            // Step 1: Transform the raw API data into our app's format
+            const transformedVehicles = transformApiData(data.Trims);
+
+            // Step 2: Get the current filters from the form to apply client-side
+            const formData = new FormData(document.getElementById('filter-form'));
+            const selectedFilters = {};
+            for (const [key, value] of formData.entries()) {
+                if(selectedFilters[key]) {
+                    if(!Array.isArray(selectedFilters[key])) {
+                        selectedFilters[key] = [selectedFilters[key]];
+                    }
+                    selectedFilters[key].push(value);
+                } else {
+                    selectedFilters[key] = value;
+                }
+            }
+
+            // Step 3: Apply our detailed client-side filters to the API results
+            const finalVehicles = filterVehicles(selectedFilters, transformedVehicles);
+            console.log(`Applied client-side filters. ${finalVehicles.length} vehicles remaining.`);
+
+            displaySearchResults(finalVehicles);
+        } else {
+            displaySearchResults([]); // Handle no results from API
+        }
+    }
+
+    function transformApiData(apiTrims) {
+        if (!apiTrims) return [];
+        return apiTrims.map(trim => {
+            const price = Math.floor(Math.random() * (70000 - 20000 + 1)) + 20000;
+            const bodyType = trim.model_body?.toLowerCase() || '';
+            const isPerson = ['sedan', 'hatchback', 'wagon', 'suv', 'crossover', 'minivan', 'coupe', 'roadster'].includes(bodyType);
+
+            // Randomly generate data for fields not in the API
+            const randomOrientation = Math.random() < 0.5 ? 'powerful' : 'economic';
+            const randomColor = Math.random() < 0.5 ? 'bright' : 'dark';
+            const randomTripRange = Math.random() < 0.5 ? 'long' : 'short';
+            const randomMileage = Math.floor(Math.random() * 100000);
+
+            let vehicleClass = 'medium';
+            if (price < 30000) vehicleClass = 'basic';
+            if (price > 55000) vehicleClass = 'luxury';
+
+            let originMap = { 'USA': 'na', 'Germany': 'eu', 'Japan': 'jp', 'Korea': 'kr', 'China': 'cn', 'UK': 'eu' };
+
+            return {
+                // Data from API
+                id: trim.model_id,
+                make: trim.make_display,
+                model: `${trim.model_name} ${trim.model_trim}`.trim(),
+                year: parseInt(trim.model_year, 10),
+                body: bodyType,
+                powertrain: trim.model_engine_fuel?.toLowerCase().split(' ')[0], // e.g. "Gasoline - unleaded 95" -> "gasoline"
+                fuel_consumption: trim.model_lkm_mixed ? `${trim.model_lkm_mixed} L/100km` : 'N/A',
+                origin: originMap[trim.make_country] || 'other',
+
+                // Generated/Placeholder Data
+                price: price,
+                imageUrl: `https://placehold.co/300x200/555/fff?text=${trim.make_display}+${trim.model_name}`,
+                warranty: 'N/A',
+                mileage: randomMileage,
+                transportType: isPerson ? 'person' : 'goods',
+                tripRange: randomTripRange,
+                vehicleClass: vehicleClass,
+                orientation: randomOrientation,
+                color: randomColor,
+                tonnageCapacity: isPerson ? null : (Math.random() * (2 - 0.5) + 0.5).toFixed(1),
+                cubicMeterCapacity: isPerson ? null : Math.floor(Math.random() * (15 - 5 + 1)) + 5,
+                towingCapacity: isPerson ? null : Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000,
+            };
+        });
+    }
 
     function filterVehicles(filters, vehicles) {
         let filteredVehicles = [...vehicles];
