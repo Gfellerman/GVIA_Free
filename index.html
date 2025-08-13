@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Selector Agent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Fleet Selector Agent</h1>
+    </header>
+    <main>
+        <div class="filters">
+            <h2>Filters</h2>
+            <form id="filter-form">
+                <div class="form-group">
+                    <label for="transport-type">Type of Transport:</label>
+                    <select id="transport-type" name="transport-type">
+                        <option value="goods">Goods</option>
+                        <option value="person">Person</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="trip-range">Trip Range:</label>
+                    <select id="trip-range" name="trip-range">
+                        <option value="long">Long Trips</option>
+                        <option value="short">Short Trips</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="vehicle-class">Vehicle Class:</label>
+                    <select id="vehicle-class" name="vehicle-class">
+                        <option value="basic">Basic</option>
+                        <option value="medium">Medium</option>
+                        <option value="luxury">Luxury</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="max-mileage">Max Mileage:</label>
+                    <input type="number" id="max-mileage" name="max-mileage">
+                </div>
+                <div class="form-group">
+                    <label for="max-years">Max Years of Use:</label>
+                    <input type="number" id="max-years" name="max-years">
+                </div>
+                <div class="form-group">
+                    <label for="avg-mileage">Average Mileage per Year:</label>
+                    <input type="number" id="avg-mileage" name="avg-mileage">
+                </div>
+                <div class="form-group">
+                    <label for="vehicle-orientation">Vehicle Orientation:</label>
+                    <select id="vehicle-orientation" name="vehicle-orientation">
+                        <option value="powerful">Powerful</option>
+                        <option value="economic">Economic</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color-preference">Color Preference:</label>
+                    <select id="color-preference" name="color-preference">
+                        <option value="bright">Bright</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Vehicle Origin:</label>
+                    <div><input type="checkbox" id="origin-na" name="origin" value="na"><label for="origin-na">North America</label></div>
+                    <div><input type="checkbox" id="origin-eu" name="origin" value="eu"><label for="origin-eu">Europe</label></div>
+                    <div><input type="checkbox" id="origin-jp" name="origin" value="jp"><label for="origin-jp">Japan</label></div>
+                    <div><input type="checkbox" id="origin-kr" name="origin" value="kr"><label for="origin-kr">Korea</label></div>
+                    <div><input type="checkbox" id="origin-cn" name="origin" value="cn"><label for="origin-cn">China</label></div>
+                    <div><input type="checkbox" id="origin-other" name="origin" value="other"><label for="origin-other">Other</label></div>
+                </div>
+                <div class="form-group">
+                    <label>Powertrain:</label>
+                    <div><input type="checkbox" id="powertrain-all" name="powertrain-all"><label for="powertrain-all">Select All</label></div>
+                    <div><input type="checkbox" id="powertrain-petrol" name="powertrain" value="petrol"><label for="powertrain-petrol">Petrol</label></div>
+                    <div><input type="checkbox" id="powertrain-diesel" name="powertrain" value="diesel"><label for="powertrain-diesel">Diesel</label></div>
+                    <div><input type="checkbox" id="powertrain-hybrid" name="powertrain" value="hybrid"><label for="powertrain-hybrid">Hybrid</label></div>
+                    <div><input type="checkbox" id="powertrain-electric" name="powertrain" value="electric"><label for="powertrain-electric">Electric</label></div>
+                </div>
+                <div class="form-group">
+                    <label>Car Body Types:</label>
+                    <div><input type="checkbox" id="body-sedan" name="body" value="sedan"><label for="body-sedan">Sedan</label></div>
+                    <div><input type="checkbox" id="body-hatchback" name="body" value="hatchback"><label for="body-hatchback">Hatchback</label></div>
+                    <div><input type="checkbox" id="body-wagon" name="body" value="wagon"><label for="body-wagon">Wagon</label></div>
+                    <div><input type="checkbox" id="body-3door" name="body" value="3door"><label for="body-3door">3 doors</label></div>
+                    <div><input type="checkbox" id="body-5door" name="body" value="5door"><label for="body-5door">5 doors</label></div>
+                </div>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="results">
+            <h2>Results</h2>
+            <div id="results-container">
+                <!-- Results will be displayed here -->
+            </div>
+            <button id="more-results">More</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Fleet Selector Agent</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
