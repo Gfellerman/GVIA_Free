@@ -2,6 +2,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterForm = document.getElementById('filter-form');
     const powertrainAllCheckbox = document.getElementById('powertrain-all');
     const powertrainCheckboxes = document.querySelectorAll('input[name="powertrain"]');
+    const transportGoodsCheckbox = document.getElementById('transport-goods');
+    const goodsSpecificFilters = document.getElementById('goods-specific-filters');
+    const countrySelect = document.getElementById('country');
+    const maxMileageLabel = document.getElementById('max-mileage-label');
+    const avgMileageLabel = document.getElementById('avg-mileage-label');
+
+    function updateMileageLabels() {
+        const selectedCountry = countrySelect.value;
+        if (selectedCountry === 'us') {
+            maxMileageLabel.textContent = 'Max Mileage (miles):';
+            avgMileageLabel.textContent = 'Average Mileage per Year (miles):';
+        } else {
+            maxMileageLabel.textContent = 'Max Mileage (km):';
+            avgMileageLabel.textContent = 'Average Mileage per Year (km):';
+        }
+    }
+
+    countrySelect.addEventListener('change', updateMileageLabels);
+
+    // Initial call to set labels based on default selection
+    updateMileageLabels();
+
+    transportGoodsCheckbox.addEventListener('change', () => {
+        if (transportGoodsCheckbox.checked) {
+            goodsSpecificFilters.style.display = 'block';
+        } else {
+            goodsSpecificFilters.style.display = 'none';
+        }
+    });
 
     filterForm.addEventListener('submit', (event) => {
         event.preventDefault();

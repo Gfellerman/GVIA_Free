@@ -15,29 +15,47 @@
             <h2>Filters</h2>
             <form id="filter-form">
                 <div class="form-group">
-                    <label for="transport-type">Type of Transport:</label>
-                    <select id="transport-type" name="transport-type">
-                        <option value="goods">Goods</option>
-                        <option value="person">Person</option>
+                    <label for="country">Country:</label>
+                    <select id="country" name="country">
+                        <option value="us">United States</option>
+                        <option value="ca">Canada</option>
+                        <option value="de">Germany</option>
+                        <option value="jp">Japan</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="trip-range">Trip Range:</label>
-                    <select id="trip-range" name="trip-range">
-                        <option value="long">Long Trips</option>
-                        <option value="short">Short Trips</option>
-                    </select>
+                    <label>Type of Transport:</label>
+                    <div><input type="checkbox" id="transport-goods" name="transport-type" value="goods"><label for="transport-goods">Goods</label></div>
+                    <div><input type="checkbox" id="transport-person" name="transport-type" value="person"><label for="transport-person">Person</label></div>
+                </div>
+                <div id="goods-specific-filters" style="display: none;">
+                    <div class="form-group">
+                        <label for="tonnage-capacity">Tonnage Capacity (in tons):</label>
+                        <input type="number" id="tonnage-capacity" name="tonnage-capacity">
+                    </div>
+                    <div class="form-group">
+                        <label for="cubic-meter-capacity">Cubic Meter Capacity (m³):</label>
+                        <input type="number" id="cubic-meter-capacity" name="cubic-meter-capacity">
+                    </div>
+                    <div class="form-group">
+                        <label for="towing-capacity">Towing Capacity (in kg):</label>
+                        <input type="number" id="towing-capacity" name="towing-capacity">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="vehicle-class">Vehicle Class:</label>
-                    <select id="vehicle-class" name="vehicle-class">
-                        <option value="basic">Basic</option>
-                        <option value="medium">Medium</option>
-                        <option value="luxury">Luxury</option>
-                    </select>
+                    <label>Trip Range:</label>
+                    <div><input type="checkbox" id="trip-long" name="trip-range" value="long"><label for="trip-long">Long Trips</label></div>
+                    <div><input type="checkbox" id="trip-short" name="trip-range" value="short"><label for="trip-short">Short Trips</label></div>
                 </div>
                 <div class="form-group">
-                    <label for="max-mileage">Max Mileage:</label>
+                    <label>Vehicle Class:</label>
+                    <div><input type="checkbox" id="class-basic" name="vehicle-class" value="basic"><label for="class-basic">Basic</label></div>
+                    <div><input type="checkbox" id="class-medium" name="vehicle-class" value="medium"><label for="class-medium">Medium</label></div>
+                    <div><input type="checkbox" id="class-luxury" name="vehicle-class" value="luxury"><label for="class-luxury">Luxury</label></div>
+                </div>
+                <div class="form-group">
+                    <label id="max-mileage-label" for="max-mileage">Max Mileage:</label>
                     <input type="number" id="max-mileage" name="max-mileage">
                 </div>
                 <div class="form-group">
@@ -45,22 +63,18 @@
                     <input type="number" id="max-years" name="max-years">
                 </div>
                 <div class="form-group">
-                    <label for="avg-mileage">Average Mileage per Year:</label>
+                    <label id="avg-mileage-label" for="avg-mileage">Average Mileage per Year:</label>
                     <input type="number" id="avg-mileage" name="avg-mileage">
                 </div>
                 <div class="form-group">
-                    <label for="vehicle-orientation">Vehicle Orientation:</label>
-                    <select id="vehicle-orientation" name="vehicle-orientation">
-                        <option value="powerful">Powerful</option>
-                        <option value="economic">Economic</option>
-                    </select>
+                    <label>Vehicle Orientation:</label>
+                    <div><input type="checkbox" id="orientation-powerful" name="vehicle-orientation" value="powerful"><label for="orientation-powerful">Powerful</label></div>
+                    <div><input type="checkbox" id="orientation-economic" name="vehicle-orientation" value="economic"><label for="orientation-economic">Economic</label></div>
                 </div>
                 <div class="form-group">
-                    <label for="color-preference">Color Preference:</label>
-                    <select id="color-preference" name="color-preference">
-                        <option value="bright">Bright</option>
-                        <option value="dark">Dark</option>
-                    </select>
+                    <label>Color Preference:</label>
+                    <div><input type="checkbox" id="color-bright" name="color-preference" value="bright"><label for="color-bright">Bright</label></div>
+                    <div><input type="checkbox" id="color-dark" name="color-preference" value="dark"><label for="color-dark">Dark</label></div>
                 </div>
                 <div class="form-group">
                     <label>Vehicle Origin:</label>
