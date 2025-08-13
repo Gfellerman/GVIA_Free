@@ -66,6 +66,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filterForm.addEventListener('submit', (event) => {
         event.preventDefault();
+
+        // Validation for required fields
+        const country = document.getElementById('country').value;
+        const transportTypes = document.querySelectorAll('input[name="transport-type"]:checked').length;
+
+        if (!country) {
+            alert('Please select a country.');
+            return;
+        }
+
+        if (transportTypes === 0) {
+            alert('Please select at least one Type of Transport.');
+            return;
+        }
+
         const formData = new FormData(filterForm);
         const selectedFilters = {};
         for (const [key, value] of formData.entries()) {
@@ -84,19 +99,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function filterVehicles(filters, vehicles) {
-        // Helper function to check if a checkbox group filter is active and has selected values
-        const isCheckboxFilterActive = (filterName) => Array.isArray(filters[filterName]) && filters[filterName].length > 0;
-
         return vehicles.filter(vehicle => {
-            // Checkbox group filters
-            if (isCheckboxFilterActive('transport-type') && !filters['transport-type'].includes(vehicle.transportType)) return false;
-            if (isCheckboxFilterActive('trip-range') && !filters['trip-range'].includes(vehicle.tripRange)) return false;
-            if (isCheckboxFilterActive('vehicle-class') && !filters['vehicle-class'].includes(vehicle.vehicleClass)) return false;
-            if (isCheckboxFilterActive('vehicle-orientation') && !filters['vehicle-orientation'].includes(vehicle.orientation)) return false;
-            if (isCheckboxFilterActive('color-preference') && !filters['color-preference'].includes(vehicle.color)) return false;
-            if (isCheckboxFilterActive('origin') && !filters['origin'].includes(vehicle.origin)) return false;
-            if (isCheckboxFilterActive('powertrain') && !filters['powertrain'].includes(vehicle.powertrain)) return false;
-            if (isCheckboxFilterActive('body') && !filters['body'].includes(vehicle.body)) return false;
+            // This helper function checks if a vehicle property matches a filter.
+            // The filter can be undefined, a single value (string), or multiple values (array).
+            const vehicleMatches = (filterName, vehicleProperty) => {
+                const selectedValues = filters[filterName];
+
+                // If the filter is not set or is an empty array/string, the vehicle passes.
+                if (!selectedValues || selectedValues.length === 0) {
+                    return true;
+                }
+
+                // Coerce to array to handle both single and multiple selections.
+                const selectedValuesArray = Array.isArray(selectedValues) ? selectedValues : [selectedValues];
+                return selectedValuesArray.includes(vehicleProperty);
+            };
+
+            // --- Apply all filters ---
+            if (!vehicleMatches('transport-type', vehicle.transportType)) return false;
+            if (!vehicleMatches('trip-range', vehicle.tripRange)) return false;
+            if (!vehicleMatches('vehicle-class', vehicle.vehicleClass)) return false;
+            if (!vehicleMatches('vehicle-orientation', vehicle.orientation)) return false;
+            if (!vehicleMatches('color-preference', vehicle.color)) return false;
+            if (!vehicleMatches('origin', vehicle.origin)) return false;
+            if (!vehicleMatches('powertrain', vehicle.powertrain)) return false;
+            if (!vehicleMatches('body', vehicle.body)) return false;
 
             // Number range filters (max value)
             if (filters['max-mileage'] && vehicle.mileage > parseInt(filters['max-mileage'], 10)) return false;
@@ -104,7 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Number range filters (min value for goods transport)
             // These filters only apply if 'goods' is selected
-            if (filters['transport-type']?.includes('goods')) {
+            const transportType = filters['transport-type'];
+            const transportTypeArray = Array.isArray(transportType) ? transportType : [transportType];
+            if (transportType && transportTypeArray.includes('goods')) {
                 if (filters['tonnage-capacity'] && (vehicle.tonnageCapacity || 0) < parseFloat(filters['tonnage-capacity'])) return false;
                 if (filters['cubic-meter-capacity'] && (vehicle.cubicMeterCapacity || 0) < parseFloat(filters['cubic-meter-capacity'])) return false;
                 if (filters['towing-capacity'] && (vehicle.towingCapacity || 0) < parseFloat(filters['towing-capacity'])) return false;
