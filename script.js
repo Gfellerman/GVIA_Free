@@ -99,48 +99,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function filterVehicles(filters, vehicles) {
-        return vehicles.filter(vehicle => {
-            // This helper function checks if a vehicle property matches a filter.
-            // The filter can be undefined, a single value (string), or multiple values (array).
-            const vehicleMatches = (filterName, vehicleProperty) => {
-                const selectedValues = filters[filterName];
+        let filteredVehicles = vehicles;
 
-                // If the filter is not set or is an empty array/string, the vehicle passes.
-                if (!selectedValues || selectedValues.length === 0) {
-                    return true;
-                }
-
-                // Coerce to array to handle both single and multiple selections.
-                const selectedValuesArray = Array.isArray(selectedValues) ? selectedValues : [selectedValues];
-                return selectedValuesArray.includes(vehicleProperty);
-            };
-
-            // --- Apply all filters ---
-            if (!vehicleMatches('transport-type', vehicle.transportType)) return false;
-            if (!vehicleMatches('trip-range', vehicle.tripRange)) return false;
-            if (!vehicleMatches('vehicle-class', vehicle.vehicleClass)) return false;
-            if (!vehicleMatches('vehicle-orientation', vehicle.orientation)) return false;
-            if (!vehicleMatches('color-preference', vehicle.color)) return false;
-            if (!vehicleMatches('origin', vehicle.origin)) return false;
-            if (!vehicleMatches('powertrain', vehicle.powertrain)) return false;
-            if (!vehicleMatches('body', vehicle.body)) return false;
-
-            // Number range filters (max value)
-            if (filters['max-mileage'] && vehicle.mileage > parseInt(filters['max-mileage'], 10)) return false;
-            if (filters['max-years'] && vehicle.year < (new Date().getFullYear() - parseInt(filters['max-years'], 10))) return false;
-
-            // Number range filters (min value for goods transport)
-            // These filters only apply if 'goods' is selected
-            const transportType = filters['transport-type'];
-            const transportTypeArray = Array.isArray(transportType) ? transportType : [transportType];
-            if (transportType && transportTypeArray.includes('goods')) {
-                if (filters['tonnage-capacity'] && (vehicle.tonnageCapacity || 0) < parseFloat(filters['tonnage-capacity'])) return false;
-                if (filters['cubic-meter-capacity'] && (vehicle.cubicMeterCapacity || 0) < parseFloat(filters['cubic-meter-capacity'])) return false;
-                if (filters['towing-capacity'] && (vehicle.towingCapacity || 0) < parseFloat(filters['towing-capacity'])) return false;
+        // Helper for checkbox groups
+        const applyCheckboxFilter = (key, property) => {
+            if (filters[key] && filters[key].length > 0) {
+                const selected = Array.isArray(filters[key]) ? filters[key] : [filters[key]];
+                filteredVehicles = filteredVehicles.filter(v => selected.includes(v[property]));
             }
+        };
 
-            return true; // All checks passed
-        });
+        // Apply all checkbox filters
+        applyCheckboxFilter('transport-type', 'transportType');
+        applyCheckboxFilter('trip-range', 'tripRange');
+        applyCheckboxFilter('vehicle-class', 'vehicleClass');
+        applyCheckboxFilter('vehicle-orientation', 'orientation');
+        applyCheckboxFilter('color-preference', 'color');
+        applyCheckboxFilter('origin', 'origin');
+        applyCheckboxFilter('powertrain', 'powertrain');
+        applyCheckboxFilter('body', 'body');
+
+        // Apply max-mileage filter
+        if (filters['max-mileage']) {
+            filteredVehicles = filteredVehicles.filter(v => v.mileage <= parseInt(filters['max-mileage'], 10));
+        }
+
+        // Apply max-years filter
+        if (filters['max-years']) {
+            const minYear = new Date().getFullYear() - parseInt(filters['max-years'], 10);
+            filteredVehicles = filteredVehicles.filter(v => v.year >= minYear);
+        }
+
+        // Apply goods-specific filters (only if 'goods' is selected)
+        const transportType = filters['transport-type'];
+        const isGoodsSelected = transportType && (Array.isArray(transportType) ? transportType.includes('goods') : transportType === 'goods');
+
+        if (isGoodsSelected) {
+            if (filters['tonnage-capacity']) {
+                filteredVehicles = filteredVehicles.filter(v => (v.tonnageCapacity || 0) >= parseFloat(filters['tonnage-capacity']));
+            }
+            if (filters['cubic-meter-capacity']) {
+                filteredVehicles = filteredVehicles.filter(v => (v.cubicMeterCapacity || 0) >= parseFloat(filters['cubic-meter-capacity']));
+            }
+            if (filters['towing-capacity']) {
+                filteredVehicles = filteredVehicles.filter(v => (v.towingCapacity || 0) >= parseFloat(filters['towing-capacity']));
+            }
+        }
+
+        return filteredVehicles;
     }
 
     const resultsContainer = document.getElementById('results-container');
